@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# Merge a branch by cherry-picking instead of git merge. If your branch is ahead
+# by multiple commits it will squash your commits and cherry-pick.
+#
+# Examples
+#
+#   git cherry-merge <branch-name> -m "Your new commit message"
+
+set -e
+
+CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+CURRENT_BRANCH_LATEST_COMMIT="$(git log -1 --format="%H")"
+MERGING_BRANCH="$1"
+COMMIT_MESSAGE=
+BEHIND_BY=`git rev-list ${MERGING_BRANCH}..${CURRENT_BRANCH} --cherry-pick --count`
+AHEAD_BY=`git rev-list ${CURRENT_BRANCH}..${MERGING_BRANCH} --cherry-pick --count`
+REBASE=false
+
+usage()
+{
+cat <<EOF
+
+USAGE: git cherry-merge <BRANCH NAME> [OPTIONS] [TEXT]
+
+OPTIONS
+
+    -m  New commit message for your sqaushed commits
+
+EOF
+    return;
+}
+
+# Checkouts out the branch being merged in and
+# squashes all the commits into one new commit
+squash_commits()
+{
+    git checkout ${MERGING_BRANCH}
+    git reset --soft HEAD~${AHEAD_BY}
+    git commit -am "${COMMIT_MESSAGE}"
+    git checkout ${CURRENT_BRANCH}
+}
+
+if [[ $1 == "--help" ]] || [[ $1 == "-h" ]];
+then
+    usage
+    exit
+fi
+
+while [[ "$2" = -?* ]]; do
+    case $2 in
+        -m | -message)
+            COMMIT_MESSAGE="$3"
+            ;;
+        *)
+            echo "ERROR: unknown parameter \"$2\""
+            usage
+            exit 1
+            ;;
+    esac
+    shift
+done
+
+if [[ $BEHIND_BY -ne 0 ]];
+then
+    echo "${MERGING_BRANCH} is behind ${CURRENT_BRANCH} by ${BEHIND_BY} commit(s). Please rebase ${MERGING_BRANCH} and try again."
+    exit
+fi
+
+if [[ ${COMMIT_MESSAGE} == "" ]];
+then
+    COMMIT_MESSAGE="$(git log -1 ${MERGING_BRANCH} --pretty=%B)"
+fi
+
+squash_commits
+
+git cherry-pick $(git log -1 ${MERGING_BRANCH} --format="%H")
+

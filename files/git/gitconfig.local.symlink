@@ -1,0 +1,5 @@
+[user]
+        name = Jerry Lopez
+        email = me@jerry.do
+[credential]
+        helper = osxkeychain

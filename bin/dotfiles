@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -e
+trap 'error "$(printf "Command \`%s\` at $BASH_SOURCE:$LINENO failed with exit code $?" "$BASH_COMMAND")"' ERR
+
+## find directory where this script is located following symlinks if neccessary
+readonly DOTFILES_DIR="$(
+  cd "$(
+    dirname "$(
+      (readlink "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}") \
+        | sed -e "s#^../#$(dirname "$(dirname "${BASH_SOURCE[0]}")")/#"
+    )"
+  )/.." >/dev/null \
+  && pwd
+)"
+
+## parse first argument as command and determine validity
+if (( "$#" )) && [[ -f "${DOTFILES_DIR}/commands/${1}.cmd" ]]; then
+  DOTFILES_COMMAND="$1"
+  shift
+else
+  DOTFILES_COMMAND=usage
+fi
+
+## parse arguments
+while (( "$#" )); do
+  case "$1" in
+    -h|--help)
+      DOTFILES_HELP=1
+      break
+      ;;
+    --) # end argument parsing (unless command is on 'anyargs' list and consumes anything as params)
+      shift
+      containsElement "${DOTFILES_COMMAND}" "${DOTFILES_ANYARGS[@]}" || break
+      ;;
+    -*|--*=) # unsupported flags (unless command is on 'anyargs' list and consumes anything as params)
+      containsElement "${DOTFILES_COMMAND}" "${DOTFILES_ANYARGS[@]}" && break
+      fatal "Unsupported flag $1"
+      ;;
+    *) # preserve positional arguments
+      DOTFILES_PARAMS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+## display command specific usage info if help flag is set
+if [[ ${DOTFILES_HELP} ]]; then
+  source "${DOTFILES_DIR}/commands/usage.cmd"
+fi
+
+## execute sub-command in context of this script
+source "${DOTFILES_DIR}/commands/${DOTFILES_COMMAND}.cmd"
