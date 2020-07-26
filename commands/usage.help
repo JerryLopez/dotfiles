@@ -9,5 +9,6 @@ DOTFILES_USAGE=$(cat <<EOF
 \033[33mCommands:\033[0m
   install           Installs dot files and MacOS apps
   update            Updates homebrew packages and system with new configuration
+  edit              Opens dotfiles directory in code editor
 EOF
 )
