@@ -8,6 +8,8 @@ cd "${DOTFILES_ROOT}"
 source "${DOTFILES_DIR}/utils/install.sh"
 source "${DOTFILES_DIR}/utils/messages.sh"
 
+linkFile "${DOTFILES_ROOT}" "${HOME}/.dotfiles"
+
 if ! [ -f "${DOTFILES_ROOT}/git/gitconfig.local.symlink" ]
 then
   :: 'Setting up git configuration'
