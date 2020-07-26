@@ -6,6 +6,12 @@
       },
       "homebrew/bundle": {
         "revision": "38450939dcc5a7bd5c139464fb35b5939c406221"
+      },
+      "davidalger/warden": {
+        "revision": "7888afd48b1eeec80f99c1a73ebe3880d3d79c53"
+      },
+      "mutagen-io/mutagen": {
+        "revision": "4ef8244cbc17d7c9fc54176aefd6329904d222ae"
       }
     },
     "brew": {
@@ -381,11 +387,12 @@
       "zsh-completions": {
         "version": "0.32.0",
         "bottle": false
-      }
+      },
+      "mutagen-io/mutagen/mutagen": null
     },
     "cask": {
       "1password": {
-        "version": "7.4.1",
+        "version": "7.5",
         "options": {
           "full_name": "1password",
           "args": {
@@ -394,7 +401,7 @@
         }
       },
       "alfred": {
-        "version": "4.0.6_1124",
+        "version": "4.0.9_1144",
         "options": {
           "full_name": "alfred",
           "args": {
@@ -403,7 +410,7 @@
         }
       },
       "docker": {
-        "version": "2.1.0.5,40693",
+        "version": "2.3.0.3,45519",
         "options": {
           "full_name": "docker",
           "args": {
@@ -430,7 +437,7 @@
         }
       },
       "github": {
-        "version": "2.2.3-3e4755f1",
+        "version": "2.5.3-f26bc4fa",
         "options": {
           "full_name": "github",
           "args": {
@@ -439,7 +446,7 @@
         }
       },
       "google-chrome": {
-        "version": "78.0.3904.108",
+        "version": "83.0.4103.116",
         "options": {
           "full_name": "google-chrome",
           "args": {
@@ -448,7 +455,7 @@
         }
       },
       "keepingyouawake": {
-        "version": "1.5.0",
+        "version": "1.5.1",
         "options": {
           "full_name": "keepingyouawake",
           "args": {
@@ -457,7 +464,7 @@
         }
       },
       "slack": {
-        "version": "4.2.0",
+        "version": "4.6.0",
         "options": {
           "full_name": "slack",
           "args": {
@@ -466,7 +473,7 @@
         }
       },
       "tableplus": {
-        "version": "2.11.2,278",
+        "version": "3.6.2,322",
         "options": {
           "full_name": "tableplus",
           "args": {
@@ -475,7 +482,7 @@
         }
       },
       "vlc": {
-        "version": "3.0.8",
+        "version": "3.0.11",
         "options": {
           "full_name": "vlc",
           "args": {
@@ -484,7 +491,7 @@
         }
       },
       "viscosity": {
-        "version": "1.8.3",
+        "version": "1.8.5",
         "options": {
           "full_name": "viscosity",
           "args": {
@@ -493,7 +500,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.40.2",
+        "version": "1.46.1",
         "options": {
           "full_name": "visual-studio-code",
           "args": {
@@ -511,7 +518,7 @@
         }
       },
       "iterm2": {
-        "version": "3.3.7",
+        "version": "3.3.11",
         "options": {
           "full_name": "iterm2",
           "args": {
@@ -545,6 +552,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "phpstorm": {
+        "version": "2020.1.2,201.7846.90",
+        "options": {
+          "full_name": "phpstorm",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },
@@ -553,10 +569,10 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.4.2",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "b65c400c1f4cec22b3dd600a4f5e1026dfeeb58c",
-        "CLT": "11.0.33.17",
-        "Xcode": "11.3.1",
-        "macOS": "10.15.4"
+        "Homebrew/homebrew-core": "6a0e2dd12de9ab34d19438d9a97d55746b78422a",
+        "CLT": "11.5.0.0.1.1588476445",
+        "Xcode": "11.5",
+        "macOS": "10.15.5"
       }
     }
   }
