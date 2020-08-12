@@ -14,7 +14,7 @@ $ZSH/macos/set-defaults.sh
 brew update
 
 :: Installing homebrew packages
-brew bundle
+brew bundle --force || true
 
 :: Running topic install scripts
 find $ZSH -name install.sh | while read installer ; do sh -c "${installer}" ; done
