@@ -14,7 +14,7 @@ extensions=(
 )
 
 for file in ${files[@]}; do
-    if [ ! -f "$VSCODE_SETTINGS_DIR/$file" ]; then
+    if [ ! -f "$VSCODE_USER_PATH/$file" ]; then
         ln -s "$VSCODE_SETTINGS_DIR/$file" "$VSCODE_USER_PATH"
     fi
 done
