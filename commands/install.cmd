@@ -8,7 +8,10 @@ cd "${DOTFILES_ROOT}"
 source "${DOTFILES_DIR}/utils/install.sh"
 source "${DOTFILES_DIR}/utils/messages.sh"
 
-linkFile "${DOTFILES_ROOT}" "${HOME}/.dotfiles"
+if ! [ -L "${HOME}/.dotfiles" ]
+then
+    linkFile "${DOTFILES_ROOT}" "${HOME}/.dotfiles"
+fi
 
 if ! [ -f "${DOTFILES_ROOT}/git/gitconfig.local.symlink" ]
 then
@@ -22,7 +25,7 @@ then
 
   :: ' - What is your github author name?'
   read -e git_authorname
-  
+
   :: ' - What is your github author email?'
   read -e git_authoremail
 
@@ -34,7 +37,7 @@ fi
 if test ! $(which brew)
 then
     :: "Installing Homebrew for you."
-    
+
     # Install the correct homebrew for each OS type
     if test "$(uname)" = "Darwin"
     then
