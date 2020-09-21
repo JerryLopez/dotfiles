@@ -36,6 +36,7 @@ brew 'zsh-completions'
 
 cask '1password'
 cask 'alfred'
+cask 'basecamp'
 cask 'docker'
 cask 'font-fira-code'
 cask 'flux'
